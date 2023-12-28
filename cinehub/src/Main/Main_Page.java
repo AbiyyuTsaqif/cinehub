@@ -41,6 +41,8 @@ public class Main_Page extends javax.swing.JFrame {
         History_Menu = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        Genre_Menu = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
         MenuContent = new javax.swing.JPanel();
         Home_Content = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
@@ -169,13 +171,42 @@ public class Main_Page extends javax.swing.JFrame {
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        SideBar.add(History_Menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 300, -1));
+        SideBar.add(History_Menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 300, -1));
 
         jLabel9.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 50)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("CineHub");
         SideBar.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 110));
+
+        Genre_Menu.setBackground(new java.awt.Color(33, 78, 87));
+        Genre_Menu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Genre_MenuMouseClicked(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 20)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("Genre");
+
+        javax.swing.GroupLayout Genre_MenuLayout = new javax.swing.GroupLayout(Genre_Menu);
+        Genre_Menu.setLayout(Genre_MenuLayout);
+        Genre_MenuLayout.setHorizontalGroup(
+            Genre_MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Genre_MenuLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        Genre_MenuLayout.setVerticalGroup(
+            Genre_MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Genre_MenuLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        SideBar.add(Genre_Menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, -1, -1));
 
         getContentPane().add(SideBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 650));
 
@@ -305,7 +336,7 @@ public class Main_Page extends javax.swing.JFrame {
         MenuContent.repaint();
         MenuContent.revalidate();
 
-        mood mood = new mood(); // Instantiate the HomePanel
+        Mood_panel mood = new Mood_panel(); // Instantiate the HomePanel
         MenuContent.add(mood);
         Mood_Menu.setBackground(new java.awt.Color(38, 38, 38));
         MenuContent.repaint();
@@ -325,12 +356,26 @@ public class Main_Page extends javax.swing.JFrame {
         MenuContent.revalidate();
     }//GEN-LAST:event_History_MenuMouseClicked
 
+    private void Genre_MenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Genre_MenuMouseClicked
+        resetMenuColors();
+        MenuContent.removeAll();
+        MenuContent.repaint();
+        MenuContent.revalidate();
+
+        Genre_panel genre = new Genre_panel(); // Instantiate the HomePanel
+        MenuContent.add(genre);
+        Genre_Menu.setBackground(new java.awt.Color(38, 38, 38));
+        MenuContent.repaint();
+        MenuContent.revalidate();
+    }//GEN-LAST:event_Genre_MenuMouseClicked
+
     
     private void resetMenuColors() {
         Home_Menu.setBackground(new java.awt.Color(37, 78, 87));  // RGB values for #161616
         PlanToWatch_Menu.setBackground(new java.awt.Color(37, 78, 87));
         Mood_Menu.setBackground(new java.awt.Color(37, 78, 87));
         History_Menu.setBackground(new java.awt.Color(37, 78, 87));
+        Genre_Menu.setBackground(new java.awt.Color(37, 78, 87));
     }
     /**
      * @param args the command line arguments
@@ -368,6 +413,7 @@ public class Main_Page extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Genre_Menu;
     private javax.swing.JPanel History_Content;
     private javax.swing.JPanel History_Menu;
     private javax.swing.JPanel Home_Content;
@@ -383,6 +429,7 @@ public class Main_Page extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;

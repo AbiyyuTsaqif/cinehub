@@ -5,6 +5,7 @@
  */
 package Main;
 
+import Model.Mood;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -16,14 +17,15 @@ import net.proteanit.sql.DbUtils;
  *
  * @author Endri R
  */
-public class mood extends javax.swing.JPanel {
+public class Mood_panel extends javax.swing.JPanel {
 
     /**
      * Creates new form mood
      */
-    public mood() {
+    public Mood_panel() {
         initComponents();
         displayFilm();
+        Reset();
     }
 
     /**
@@ -36,31 +38,24 @@ public class mood extends javax.swing.JPanel {
     private void initComponents() {
 
         jPasswordField1 = new javax.swing.JPasswordField();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel14 = new javax.swing.JLabel();
+        moodComboBox = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         MoodTable = new javax.swing.JTable();
-        jTextField1 = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        OkBtn = new javax.swing.JButton();
 
         jPasswordField1.setText("jPasswordField1");
 
         setBackground(new java.awt.Color(38, 38, 38));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sad", "Comedy", "Horror", "Action", "Thriller", "Sci-fi", "Romance", "Musical", "Documentary", " " }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        moodComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sad", "Happy", "Tense", "Love", "Fear" }));
+        moodComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                moodComboBoxActionPerformed(evt);
             }
         });
-        add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 90, 30));
-
-        jLabel14.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 24)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel14.setText("Search");
-        add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, 60, 30));
+        add(moodComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 120, 30));
 
         MoodTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -74,26 +69,18 @@ public class mood extends javax.swing.JPanel {
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 690, 350));
 
-        jTextField1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 170, 30));
-
         jLabel15.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 24)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("Mood");
         add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 70, 30));
 
-        jButton1.setText("OK");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        OkBtn.setText("OK");
+        OkBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                OkBtnActionPerformed(evt);
             }
         });
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 80, 50, 30));
+        add(OkBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 50, 30));
     }// </editor-fold>//GEN-END:initComponents
     
     Connection Con = null;
@@ -102,7 +89,7 @@ public class mood extends javax.swing.JPanel {
     
     private void displayFilm() {
         try {
-            Con = DriverManager.getConnection("jdbc:derby://localhost:1527/cinehub_db", "admin1", "admin");
+            Con = DriverManager.getConnection("jdbc:mysql://localhost:3306/cinehub", "root", "");
             St = Con.createStatement();
             Rs = St.executeQuery("select * from filmTable");
             MoodTable.setModel(DbUtils.resultSetToTableModel(Rs));
@@ -111,27 +98,50 @@ public class mood extends javax.swing.JPanel {
         }
     }
     
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void moodComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moodComboBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_moodComboBoxActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    private void OkBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OkBtnActionPerformed
+            try {
+            // Get the selected mood from the combo box
+            String selectedMood = (String) moodComboBox.getSelectedItem();
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+            // Check if a mood is selected
+            if (selectedMood != null) {
+                // Construct the Mood object and set the moodType
+                Mood mood = new Mood();
+                mood.setMoodType(selectedMood);
 
+                // Construct the SQL query with a WHERE clause based on the selected mood
+                String query = "SELECT * FROM filmTable WHERE mood = '" + mood.getMoodType() + "'";
+
+                // Establish database connection
+                Con = DriverManager.getConnection("jdbc:mysql://localhost:3306/cinehub", "root", "");
+                St = Con.createStatement();
+
+                // Execute the query and update the table model
+                Rs = St.executeQuery(query);
+                MoodTable.setModel(DbUtils.resultSetToTableModel(Rs));
+            } else {
+                // Handle the case where no mood is selected
+                System.out.println("Please select a mood");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_OkBtnActionPerformed
+
+    public void Reset() {
+        moodComboBox.setSelectedIndex(-1);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable MoodTable;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel14;
+    private javax.swing.JButton OkBtn;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JComboBox<String> moodComboBox;
     // End of variables declaration//GEN-END:variables
 }

@@ -43,7 +43,6 @@ public class Film_Panel extends javax.swing.JPanel {
         titleTb = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        GenreTb = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         DurationTb = new javax.swing.JTextField();
         filmIdTb = new javax.swing.JTextField();
@@ -57,6 +56,7 @@ public class Film_Panel extends javax.swing.JPanel {
         jLabel13 = new javax.swing.JLabel();
         moodcb = new javax.swing.JComboBox<>();
         jLabel15 = new javax.swing.JLabel();
+        GenreTb = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(38, 38, 38));
         setPreferredSize(new java.awt.Dimension(750, 590));
@@ -84,14 +84,6 @@ public class Film_Panel extends javax.swing.JPanel {
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Genre");
         add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 90, -1, -1));
-
-        GenreTb.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 13)); // NOI18N
-        GenreTb.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                GenreTbActionPerformed(evt);
-            }
-        });
-        add(GenreTb, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 110, 140, 30));
 
         jLabel12.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
@@ -178,7 +170,7 @@ public class Film_Panel extends javax.swing.JPanel {
         jLabel13.setText("Film id");
         add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
 
-        moodcb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sad", "Comedy", "Horror", "Action", "Thriller", "Sci-fi", "Romance", "Musical", "Documentary" }));
+        moodcb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sad", "Happy", "Tense", "Love", "Fear" }));
         moodcb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 moodcbActionPerformed(evt);
@@ -190,15 +182,19 @@ public class Film_Panel extends javax.swing.JPanel {
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("Duration");
         add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 90, -1, -1));
+
+        GenreTb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fantasy", "Sci-fi", "Romance", "Drama", "Thriller", "Documentary", "Comedy" }));
+        GenreTb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GenreTbActionPerformed(evt);
+            }
+        });
+        add(GenreTb, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 110, 140, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void titleTbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_titleTbActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_titleTbActionPerformed
-
-    private void GenreTbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GenreTbActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_GenreTbActionPerformed
 
     private void DurationTbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DurationTbActionPerformed
         // TODO add your handling code here:
@@ -225,7 +221,7 @@ public class Film_Panel extends javax.swing.JPanel {
 //        }
 //    }
     private void SaveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveBtnActionPerformed
-        if (filmIdTb.getText().isEmpty() || titleTb.getText().isEmpty() || GenreTb.getText().isEmpty() || DurationTb.getText().isEmpty() || moodcb.getSelectedIndex() == -1) {
+        if (filmIdTb.getText().isEmpty() || titleTb.getText().isEmpty() || GenreTb.getSelectedIndex() == -1 || DurationTb.getText().isEmpty() || moodcb.getSelectedIndex() == -1) {
         JOptionPane.showMessageDialog(this, "Please fill all of the information");
     } else {
         try {
@@ -234,7 +230,7 @@ public class Film_Panel extends javax.swing.JPanel {
             // Use setter methods to set the values
             classFilm.setFilmid(filmIdTb.getText());
             classFilm.setTitle(titleTb.getText());
-            classFilm.setGenre(GenreTb.getText());
+            classFilm.setGenre(GenreTb.getSelectedItem().toString());
             classFilm.setDuration(DurationTb.getText());
             classFilm.setMood(moodcb.getSelectedItem().toString());
 
@@ -271,7 +267,7 @@ public class Film_Panel extends javax.swing.JPanel {
                 Film updatedFilm = new Film();
                 updatedFilm.setFilmid(filmId);
                 updatedFilm.setTitle(titleTb.getText());
-                updatedFilm.setGenre(GenreTb.getText());
+                updatedFilm.setGenre(GenreTb.getSelectedItem().toString());
                 updatedFilm.setDuration(DurationTb.getText());
                 updatedFilm.setMood(moodcb.getSelectedItem().toString());
 
@@ -340,7 +336,7 @@ public class Film_Panel extends javax.swing.JPanel {
         int rowIndex = filmTable.getSelectedRow();
         filmIdTb.setText(model.getValueAt(rowIndex, 0).toString());
         titleTb.setText(model.getValueAt(rowIndex, 1).toString());
-        GenreTb.setText(model.getValueAt(rowIndex, 2).toString());
+        GenreTb.setSelectedItem(model.getValueAt(rowIndex, 4).toString());
         DurationTb.setText(model.getValueAt(rowIndex, 3).toString());
         moodcb.setSelectedItem(model.getValueAt(rowIndex, 4).toString());
     }//GEN-LAST:event_filmTableMouseClicked
@@ -348,7 +344,7 @@ public class Film_Panel extends javax.swing.JPanel {
     public void Reset() {
         filmIdTb.setText("");
         titleTb.setText("");
-        GenreTb.setText("");
+        GenreTb.setSelectedIndex(-1);
         DurationTb.setText("");
         moodcb.setSelectedIndex(-1);
     }
@@ -360,12 +356,16 @@ public class Film_Panel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_moodcbActionPerformed
 
+    private void GenreTbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GenreTbActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_GenreTbActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton DeleteBtn;
     private javax.swing.JTextField DurationTb;
     private javax.swing.JButton EditBtn;
-    private javax.swing.JTextField GenreTb;
+    private javax.swing.JComboBox<String> GenreTb;
     private javax.swing.JButton ResetBtn;
     private javax.swing.JButton SaveBtn;
     private javax.swing.JTextField filmIdTb;

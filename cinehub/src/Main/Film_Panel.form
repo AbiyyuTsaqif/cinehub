@@ -89,21 +89,6 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JTextField" name="GenreTb">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tw Cen MT Condensed" size="13" style="1"/>
-        </Property>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="GenreTbActionPerformed"/>
-      </Events>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="330" y="110" width="140" height="30"/>
-        </Constraint>
-      </Constraints>
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel12">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -312,16 +297,12 @@
     <Component class="javax.swing.JComboBox" name="moodcb">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="9">
+          <StringArray count="5">
             <StringItem index="0" value="Sad"/>
-            <StringItem index="1" value="Comedy"/>
-            <StringItem index="2" value="Horror"/>
-            <StringItem index="3" value="Action"/>
-            <StringItem index="4" value="Thriller"/>
-            <StringItem index="5" value="Sci-fi"/>
-            <StringItem index="6" value="Romance"/>
-            <StringItem index="7" value="Musical"/>
-            <StringItem index="8" value="Documentary"/>
+            <StringItem index="1" value="Happy"/>
+            <StringItem index="2" value="Tense"/>
+            <StringItem index="3" value="Love"/>
+            <StringItem index="4" value="Fear"/>
           </StringArray>
         </Property>
       </Properties>
@@ -350,6 +331,32 @@
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="490" y="90" width="-1" height="-1"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="GenreTb">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="7">
+            <StringItem index="0" value="Fantasy"/>
+            <StringItem index="1" value="Sci-fi"/>
+            <StringItem index="2" value="Romance"/>
+            <StringItem index="3" value="Drama"/>
+            <StringItem index="4" value="Thriller"/>
+            <StringItem index="5" value="Documentary"/>
+            <StringItem index="6" value="Comedy"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="GenreTbActionPerformed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="330" y="110" width="140" height="30"/>
         </Constraint>
       </Constraints>
     </Component>
